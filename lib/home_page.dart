@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
+import 'package:getx_learning/counter_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+    CounterClass controller = Get.put(CounterClass());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +75,25 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
+          Card(
+            child: ListTile(
+              title: Text('message'.tr),
+              subtitle: Text('name'.tr),
+            ),
+          ),
+          Obx(()=> Container(
+            // height: MediaQuery.of(context).size.height * 0.2,
+            height: Get.height * 0.2,
+            // width: MediaQuery.of(context).size.width * 0.4,
+            width: Get.width * 0.4,
+            color: Colors.deepPurpleAccent.withOpacity(controller.opacity.value),
+            child: Center(child: Text("Shruti")),
+          ),),
+          Obx(()=>
+              Slider(value: controller.opacity.value,
+                  onChanged: (value){
+                    controller.setOpacity(value);
+               }) ),
 
         ],
       ),
